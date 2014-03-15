@@ -17,7 +17,7 @@ public class UserAccountQuery implements UserAccountDao {
 	public List findAll(Connection conn) {
 
 		List<UserAccount> list = new ArrayList<UserAccount>();
-
+ 
 		try {
 			Statement stmt = conn.createStatement();
 			String sql;
