@@ -34,15 +34,6 @@ public class UserAccount {
 		this.tosAgreementFlag = tosAgreementFlag;
 	}
 
-	/*
-	@Override
-	public String toString() {
-		return new StringBuffer(" First Name : ").append(this.firstName)
-				.append(" Last Name : ").append(this.lastName)
-				.append(" Age : ").append(this.age).append(" ID : ")
-				.append(this.id).toString();
-	}*/
-
 	public Long getAccountId() {
 		return accountId;
 	}

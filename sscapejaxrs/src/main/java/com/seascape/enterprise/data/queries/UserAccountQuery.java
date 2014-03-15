@@ -82,7 +82,7 @@ public class UserAccountQuery implements UserAccountDao {
 		return user;
 	}
 
-	public Long createAccountUser(UserAccount user, Connection conn) {
+	public UserAccount createUserAccount(UserAccount user, Connection conn) {
 		
 		try {
 			StringBuffer sql = new StringBuffer();
@@ -119,13 +119,13 @@ public class UserAccountQuery implements UserAccountDao {
 			e1.printStackTrace();
 		}
 
-		return user.getAccountId();
+		return user;
 	}
 
-	public void updateAccountUser(UserAccount user) {
+	public void updateUserAccount(UserAccount user) {
 	}
 
-	public void deleteAccountUser(UserAccount user) {
+	public void deleteUserAccount(UserAccount user) {
 
 	}
 }

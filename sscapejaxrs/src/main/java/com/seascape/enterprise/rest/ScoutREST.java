@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.seascape.enterprise.dao.AccountVerificationDao;
 import com.seascape.enterprise.dao.UserAccountDao;
+import com.seascape.enterprise.data.queries.AccountVerificationQuery;
 import com.seascape.enterprise.data.queries.UserAccountQuery;
 import com.seascape.enterprise.entity.UserAccount;
 import com.seascape.enterprise.secure.service.Authenticator;
@@ -74,10 +75,31 @@ public class ScoutREST {
 		if (Authenticator.authenticateAccess(accessCode, accessKey)) {
 				Connection conn=DataConnector.getConnection();
 				UserAccountDao q = new UserAccountQuery();
-				key=q.createAccountUser(user, conn);			
+				user=q.createUserAccount(user, conn);
+				
+				/*
+				 * If new account is successfully generated then
+				 * generate a new verification code for the user
+				 */
+				Long code=null;
+				if (user.getAccountId()!=null) {
+					AccountVerificationDao dao = new AccountVerificationQuery();
+					code=dao.generateAccountVerification(user, conn);
+				}
+				
+				/*
+				 * if verification code is generate then
+				 * send the code via text message
+				 */
+				if (code!=null){
+					//do some stuff here to text msg the verification code
+					//https://github.com/smslib/smslib-v3/blob/master/src/java/examples/modem/SendMessage.java
+				}
+				
 				DataConnector.closeConnection(conn);
+				
 		}		
-		return Response.status(200).entity(key+"").build();
+		return Response.status(200).entity(user.getAccountId()+"").build();
 	}
  
 }

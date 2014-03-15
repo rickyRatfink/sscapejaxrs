@@ -9,8 +9,8 @@ public interface UserAccountDao {
 
 	public List findAll(Connection conn);
 	public UserAccount findById(Long id, Connection conn);
-	public Long createAccountUser(UserAccount user, Connection conn);
-	public void updateAccountUser(UserAccount user);
-	public void deleteAccountUser(UserAccount user);
+	public UserAccount createUserAccount(UserAccount user, Connection conn);
+	public void updateUserAccount(UserAccount user);
+	public void deleteUserAccount(UserAccount user);
 	
 }
